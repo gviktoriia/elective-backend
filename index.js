@@ -29,9 +29,21 @@ app.get("/", (req, res) => {
   res.send("Server is running");
 });
 
-// CRUD operations
+// CRUD operations students
 const StudentRoute = require("./routes/Student");
 app.use("/students", StudentRoute);
+
+// CRUD operations electives
+const ElectiveRoute = require("./routes/Elective");
+app.use("/electives", ElectiveRoute);
+
+// CRUD operations curriculum
+const CurriculumRoute = require("./routes/Curriculum");
+app.use("/curriculum", CurriculumRoute);
+
+// AUTH
+const AuthRoute = require("./routes/Auth");
+app.use("/api/auth", AuthRoute);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

@@ -17,6 +17,7 @@ exports.create = async (req, res) => {
     email: req.body.email,
     card: req.body.card,
   });
+  
 
   await student
     .save()

@@ -14,10 +14,12 @@ let studentSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
+    unique: true,
   },
   card: {
     type: String,
     required: true,
+    unique: true,
   },
 });
 
