@@ -1,10 +1,10 @@
 const CurriculumModel = require("../models/curriculum");
 
 exports.create = async (req, res) => {
-  const { student_id, elective_id, scores, final_score } = req.body;
-  console.log("Request Body:", req.body); // Log the request body
+  const { student_id, elective_id, score, date, final_score } = req.body;
+  console.log("Request Body:", req.body);
 
-  if (!student_id || !elective_id || !scores || !final_score) {
+  if (!student_id || !elective_id) {
     return res.status(400).send({ message: "Content cannot be empty!" });
   }
 
@@ -42,16 +42,13 @@ exports.create = async (req, res) => {
 };
 
 // Retrieve all curriculum from the database.
-// In your curriculum controller
-
 exports.findAll = async (req, res) => {
   try {
-    // Get elective_id from query parameters
     const electiveId = req.query.elective_id;
 
     let query = {};
     if (electiveId) {
-      query.elective_id = electiveId; // Add filtering criteria
+      query.elective_id = electiveId;
     }
 
     const curriculum = await CurriculumModel.find(query)
@@ -126,10 +123,8 @@ exports.destroy = async (req, res) => {
     });
 };
 
-
 exports.getElectiveStudentCounts = async (req, res) => {
   try {
-    // Group by elective_id and count the number of students
     const counts = await CurriculumModel.aggregate([
       {
         $group: {

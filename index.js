@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const bcrypt = require("bcryptjs");
 
 require("dotenv").config();
 
@@ -20,6 +21,8 @@ mongoose
   })
   .then(() => {
     console.log("Connected to MongoDB ElectivesApp");
+    const seedData = require("./seedData");
+    seedData();
   })
   .catch((err) => {
     console.log("Failed to connect to MongoDB", err);
@@ -43,6 +46,7 @@ app.use("/curriculum", CurriculumRoute);
 
 // AUTH
 const AuthRoute = require("./routes/Auth");
+const seedAdmin = require("./seedData");
 app.use("/api/auth", AuthRoute);
 
 app.listen(port, () => {
